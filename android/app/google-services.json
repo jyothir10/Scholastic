@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "633914524875",
+    "firebase_url": "https://scholastic-5d38e.firebaseio.com",
+    "project_id": "scholastic-5d38e",
+    "storage_bucket": "scholastic-5d38e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633914524875:android:b81d992b38661a1e78474e",
+        "android_client_info": {
+          "package_name": "co.sanika.scholastic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "633914524875-ciirpa6cv15v09l6lulpr0p1a218mgtm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgW1dFUZLF8_HJzrretzXY0XHPMEeI6TY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "633914524875-ciirpa6cv15v09l6lulpr0p1a218mgtm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
