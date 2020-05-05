@@ -76,7 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Navigator.pushNamed(context, LoginScreen.id);
               },
               color: Colors.lightBlueAccent,
-              text: 'Log In',
+              text: 'Log Innn',
             ),
             RoundedButton(
               color: Colors.blueAccent,
