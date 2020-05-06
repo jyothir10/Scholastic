@@ -1,4 +1,4 @@
-package co.appbrewery.flash_chat;
+package co.appbrewery.Scholastic;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
