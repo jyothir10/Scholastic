@@ -16,7 +16,7 @@ class _ChatListState extends State<ChatList> {
       onPress: null,
       cardChild: SubjectCard(
         subjectName: 'Subject 1',
-        teacherName: 'teacher name',
+        teacherName: 'teacher name1',
       ),
     ),
     ReusableCard(
