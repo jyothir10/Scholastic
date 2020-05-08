@@ -64,6 +64,9 @@ class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+
+      ),
       backgroundColor: Colors.white,
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
