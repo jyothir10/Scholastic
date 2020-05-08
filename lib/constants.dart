@@ -32,3 +32,12 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );
+
+const kTitleTextStyle = TextStyle(
+  fontSize: 50,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+const kTextStyle = TextStyle(
+  fontSize: 20,
+);
