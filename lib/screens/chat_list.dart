@@ -15,7 +15,7 @@ class _ChatListState extends State<ChatList> {
       color: Colors.lightBlueAccent,
       onPress: null,
       cardChild: SubjectCard(
-        subjectName: 'maths',
+        subjectName: 'Subject 1',
         teacherName: 'teacher name',
       ),
     ),
@@ -23,7 +23,7 @@ class _ChatListState extends State<ChatList> {
       color: Colors.deepOrangeAccent,
       onPress: null,
       cardChild: SubjectCard(
-        subjectName: 'maths',
+        subjectName: 'Subject 2',
         teacherName: 'teacher name',
       ),
     ),
@@ -31,7 +31,7 @@ class _ChatListState extends State<ChatList> {
       color: Colors.cyanAccent,
       onPress: null,
       cardChild: SubjectCard(
-        subjectName: 'maths',
+        subjectName: 'Subject 3',
         teacherName: 'teacher name',
       ),
     ),
@@ -39,7 +39,7 @@ class _ChatListState extends State<ChatList> {
       color: Colors.amberAccent,
       onPress: null,
       cardChild: SubjectCard(
-        subjectName: 'Maths',
+        subjectName: 'Subject 4',
         teacherName: 'teacher name',
       ),
     ),
@@ -47,7 +47,7 @@ class _ChatListState extends State<ChatList> {
       color: Colors.deepPurpleAccent,
       onPress: null,
       cardChild: SubjectCard(
-        subjectName: 'Maths',
+        subjectName: 'Subject 5',
         teacherName: 'teacher name',
       ),
     ),
@@ -55,7 +55,7 @@ class _ChatListState extends State<ChatList> {
       color: Colors.redAccent,
       onPress: null,
       cardChild: SubjectCard(
-        subjectName: 'Maths',
+        subjectName: 'Subject 6',
         teacherName: 'teacher name',
       ),
     ),
@@ -64,9 +64,7 @@ class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       backgroundColor: Colors.white,
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
