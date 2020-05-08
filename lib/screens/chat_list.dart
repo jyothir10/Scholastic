@@ -12,13 +12,7 @@ class ChatList extends StatefulWidget {
 class _ChatListState extends State<ChatList> {
   List<ReusableCard> _elements = [
     ReusableCard(
-      onPress: null,
-      cardChild: SubjectCard(
-        subjectName: 'Maths',
-        teacherName: 'teacher name',
-      ),
-    ),
-    ReusableCard(
+      color: Colors.lightBlueAccent,
       onPress: null,
       cardChild: SubjectCard(
         subjectName: 'maths',
@@ -26,6 +20,7 @@ class _ChatListState extends State<ChatList> {
       ),
     ),
     ReusableCard(
+      color: Colors.deepOrangeAccent,
       onPress: null,
       cardChild: SubjectCard(
         subjectName: 'maths',
@@ -33,6 +28,15 @@ class _ChatListState extends State<ChatList> {
       ),
     ),
     ReusableCard(
+      color: Colors.cyanAccent,
+      onPress: null,
+      cardChild: SubjectCard(
+        subjectName: 'maths',
+        teacherName: 'teacher name',
+      ),
+    ),
+    ReusableCard(
+      color: Colors.amberAccent,
       onPress: null,
       cardChild: SubjectCard(
         subjectName: 'Maths',
@@ -40,6 +44,7 @@ class _ChatListState extends State<ChatList> {
       ),
     ),
     ReusableCard(
+      color: Colors.deepPurpleAccent,
       onPress: null,
       cardChild: SubjectCard(
         subjectName: 'Maths',
@@ -47,6 +52,7 @@ class _ChatListState extends State<ChatList> {
       ),
     ),
     ReusableCard(
+      color: Colors.redAccent,
       onPress: null,
       cardChild: SubjectCard(
         subjectName: 'Maths',
