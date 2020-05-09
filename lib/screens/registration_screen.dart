@@ -115,6 +115,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   try {
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
+                    _firestore.collection('students').add({
+                      'name': name,
+                      'branch': branch,
+                      'semester': semester,
+                    });
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatList.id);
                     }
