@@ -66,33 +66,27 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 24.0,
               ),
-              DropdownButton<String>(
-                value: dropdownValue,
-                icon: Icon(Icons.keyboard_arrow_down),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.deepPurple),
-                onChanged: (String newValue) {
-                  setState(
-                    () {
+              Center(
+                child: DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  iconSize: 28,
+                  elevation: 16,
+                  style: TextStyle(color: Colors.black54, fontSize: 22),
+                  onChanged: (String newValue) {
+                    setState(() {
                       dropdownValue = newValue;
-                      if(dropdownValue=='Student'){
-                        Navigator.pushNamed(context, ChatList.id);
-                      }else{
-                        Navigator.pushNamed(context, ChatScreen.id);
-                      }
-                    },
-                  );
-                },
-                items: <String>['Student', 'Teacher']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+                    });
+                  },
+                  items: <String>['Student', 'Teacher']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
               ),
-
               RoundedButton(
                 color: Colors.lightBlueAccent,
                 text: 'Log In',
@@ -104,7 +98,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     final newUser = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
                     if (newUser != null) {
-                      Navigator.pushNamed(context, ChatList.id);
+                      if (dropdownValue == 'Student') {
+                        Navigator.pushNamed(context, ChatList.id);
+                      } else {
+                        Navigator.pushNamed(context, ChatScreen.id);
+                      }
                     }
                     setState(() {
                       showSpinner = false;

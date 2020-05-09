@@ -49,7 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
             },
           ),
         ],
-        title: Text('️Chat'),
+        title: Text('Scholastic'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(
