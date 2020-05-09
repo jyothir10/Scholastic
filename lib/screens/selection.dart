@@ -1,8 +1,7 @@
-import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/rounded_button.dart';
-import 'package:flash_chat/screens/login_screen.dart';
+import 'package:flash_chat/screens/Teacher registration screen.dart';
 import 'package:flash_chat/screens/registration_screen.dart';
 
 class Selection extends StatefulWidget {
@@ -31,10 +30,11 @@ class _SelectionState extends State<Selection> {
               },
             ),
             RoundedButton(
-                color: Colors.blueAccent, text: 'Teacher',
-                onPress: () {
-                  Navigator.pushNamed(context, RegistrationScreen.id);
-                },
+              color: Colors.blueAccent,
+              text: 'Teacher',
+              onPress: () {
+                Navigator.pushNamed(context, TeacherRegistrationScreen.id);
+              },
             ),
           ],
         ),
