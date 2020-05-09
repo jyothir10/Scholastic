@@ -27,13 +27,13 @@ class _SelectionState extends State<Selection> {
               color: Colors.lightBlueAccent,
               text: 'Student',
               onPress: () {
-                Navigator.pushNamed(context, LoginScreen.id);
+                Navigator.pushNamed(context, RegistrationScreen.id);
               },
             ),
             RoundedButton(
                 color: Colors.blueAccent, text: 'Teacher',
                 onPress: () {
-                  Navigator.pushNamed(context, LoginScreen.id);
+                  Navigator.pushNamed(context, RegistrationScreen.id);
                 },
             ),
           ],
