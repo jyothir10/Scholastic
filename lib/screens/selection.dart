@@ -22,6 +22,13 @@ class _SelectionState extends State<Selection> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Container(
+              height: 200.0,
+              child: Image.asset('images/training_icon.png'),
+            ),
+            SizedBox(
+              height: 48.0,
+            ),
             RoundedButton(
               color: Colors.lightBlueAccent,
               text: 'Student',
