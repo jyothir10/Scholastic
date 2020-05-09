@@ -3,6 +3,7 @@ import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flash_chat/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flash_chat/screens/selection.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = '/';
@@ -26,9 +27,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
         .animate(controller);
     controller.forward();
-    controller.addListener(() {
-      setState(() {});
-    });
+    controller.addListener(
+      () {
+        setState(() {});
+      },
+    );
   }
 
   @override
@@ -71,7 +74,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             ),
             RoundedButton(
               onPress: () {
-                Navigator.pushNamed(context, LoginScreen.id);
+                Navigator.pushNamed(context, Selection.id);
               },
               color: Colors.lightBlueAccent,
               text: 'Log In',
@@ -79,13 +82,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             RoundedButton(
               color: Colors.blueAccent,
               text: 'Register',
-              onPress: () {
-                Navigator.pushNamed(context, RegistrationScreen.id);
+              onPress: (){
+                Navigator.pushNamed(context, Selection.id);
               },
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
+
