@@ -99,12 +99,14 @@ class _TeacherRegistrationScreenState extends State<TeacherRegistrationScreen> {
                     showSpinner = true;
                   });
                   try {
+
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
                     _firestore.collection('teachers').add({
                       'name': name,
                       'subject': subject,
+                      'email' : email,
                     });
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
                     }
