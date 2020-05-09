@@ -57,7 +57,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   decoration: kTextFieldDecoration.copyWith(
                       hintText: 'Enter your email')),
               SizedBox(
-                height: 8.0,
+                height: 10.0,
               ),
               TextField(
                   textAlign: TextAlign.center,
@@ -67,6 +67,40 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                   decoration: kTextFieldDecoration.copyWith(
                     hintText: 'Enter your password',
+                  )),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    name = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Enter your name',
+                  )),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    branch = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Enter your branch',
+                  )),
+              SizedBox(
+                height: 10.0,
+              ),
+              TextField(
+                  textAlign: TextAlign.center,
+                  obscureText: true,
+                  onChanged: (value) {
+                    semester = value;
+                  },
+                  decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Enter your semester',
                   )),
               SizedBox(
                 height: 24.0,
