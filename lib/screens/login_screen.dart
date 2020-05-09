@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String dropdownValue = 'Student';
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
   String email;
@@ -28,8 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Flexible(
                 child: Hero(
@@ -65,6 +66,33 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 24.0,
               ),
+              DropdownButton<String>(
+                value: dropdownValue,
+                icon: Icon(Icons.keyboard_arrow_down),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(color: Colors.deepPurple),
+                onChanged: (String newValue) {
+                  setState(
+                    () {
+                      dropdownValue = newValue;
+                      if(dropdownValue=='Student'){
+                        Navigator.pushNamed(context, ChatList.id);
+                      }else{
+                        Navigator.pushNamed(context, ChatScreen.id);
+                      }
+                    },
+                  );
+                },
+                items: <String>['Student', 'Teacher']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+
               RoundedButton(
                 color: Colors.lightBlueAccent,
                 text: 'Log In',
