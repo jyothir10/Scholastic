@@ -5,6 +5,8 @@ import 'chat_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'welcome_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = '/login';
@@ -109,6 +111,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     });
                   } catch (e) {
                     print(e);
+                    Alert(
+                      context: context,
+                      type: AlertType.error,
+                      title: "ALERT",
+                      desc: "unable to login",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "back",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, WelcomeScreen.id),
+                          width: 120,
+                        )
+                      ],
+                    ).show();
                   }
                 },
               ),

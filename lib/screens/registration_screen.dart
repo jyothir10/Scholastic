@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_list.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'welcome_screen.dart';
 
 final _firestore = Firestore.instance;
 
@@ -82,26 +84,60 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(
                 height: 10.0,
               ),
-              TextField(
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    branch = value;
+              Center(
+                child: DropdownButton<String>(
+                  iconEnabledColor: Colors.lightBlueAccent,
+                  hint: Text('Branch'),
+                  value: branch,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  iconSize: 28,
+                  elevation: 20,
+                  style: TextStyle(color: Colors.black54, fontSize: 18),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      branch = newValue;
+                    });
                   },
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Enter your branch',
-                  )),
+                  items: <String>[
+                    'CSE',
+                    'CE',
+                    'ME',
+                    'ECE',
+                    'EEE',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
               SizedBox(
                 height: 10.0,
               ),
-              TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: true,
-                  onChanged: (value) {
-                    semester = value;
+              Center(
+                child: DropdownButton<String>(
+                  iconEnabledColor: Colors.lightBlueAccent,
+                  hint: Text('Semester'),
+                  value: semester,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  iconSize: 28,
+                  elevation: 16,
+                  style: TextStyle(color: Colors.black54, fontSize: 18),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      semester = newValue;
+                    });
                   },
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: 'Enter your semester',
-                  )),
+                  items: <String>['S1', 'S2', 'S3', 'S4', 'S5', 'S6']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
               SizedBox(
                 height: 24.0,
               ),
@@ -128,6 +164,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     });
                   } catch (e) {
                     print(e);
+                    Alert(
+                      context: context,
+                      type: AlertType.error,
+                      title: "ALERT",
+                      desc: "unable to register student",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "back",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, WelcomeScreen.id),
+                          width: 120,
+                        )
+                      ],
+                    ).show();
                   }
                 },
               ),
