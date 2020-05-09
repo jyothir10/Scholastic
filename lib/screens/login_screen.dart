@@ -70,11 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Center(
                 child: DropdownButton<String>(
+                  iconEnabledColor: Colors.lightBlueAccent,
                   value: dropdownValue,
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 28,
                   elevation: 16,
-                  style: TextStyle(color: Colors.black54, fontSize: 22),
+                  style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
                       dropdownValue = newValue;

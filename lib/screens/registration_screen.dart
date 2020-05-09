@@ -51,13 +51,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 48.0,
               ),
               TextField(
-                  textAlign: TextAlign.center,
-                  keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your email')),
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.emailAddress,
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration:
+                    kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
+              ),
               SizedBox(
                 height: 10.0,
               ),
@@ -86,13 +87,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               Center(
                 child: DropdownButton<String>(
-                  iconEnabledColor: Colors.lightBlueAccent,
+                  iconEnabledColor: Colors.blueAccent,
                   hint: Text('Branch'),
                   value: branch,
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 28,
                   elevation: 20,
-                  style: TextStyle(color: Colors.black54, fontSize: 18),
+                  style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
                       branch = newValue;
@@ -117,13 +118,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               Center(
                 child: DropdownButton<String>(
-                  iconEnabledColor: Colors.lightBlueAccent,
+                  iconEnabledColor: Colors.blueAccent,
                   hint: Text('Semester'),
                   value: semester,
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 28,
                   elevation: 16,
-                  style: TextStyle(color: Colors.black54, fontSize: 18),
+                  style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
                       semester = newValue;
