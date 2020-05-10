@@ -1,3 +1,4 @@
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/reusable_card.dart';
 import 'package:flash_chat/constants.dart';
@@ -17,123 +18,113 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
-//  Future<String> getTeacherId(String subject) async {
-//    try {
-//      var querySnapshot = await _firestore
-//          .collection('teachers')
-//          .where('subject', isEqualTo: subject)
-//          .getDocuments();
-//      final List<DocumentSnapshot> documents = querySnapshot.documents;
-//
-//      for (var document in documents) {
-//        teacherId = document.data['id'].toString();
-//      }
-//      return teacherId;
-//    } catch (e) {
-//      print(e);
-//      return e;
-//    }
-//  }
+  Future<String> getTeacherId(String subject) async {
+    try {
+      var querySnapshot = await _firestore
+          .collection('teachers')
+          .where('subject', isEqualTo: subject)
+          .getDocuments();
+      final List<DocumentSnapshot> documents = querySnapshot.documents;
 
-  List<ReusableCard> _elements = [
-    ReusableCard(
-      color: Colors.lightBlueAccent,
-      onPress: () async {
-        subject = 'subject1';
+      for (var document in documents) {
+        teacherId = document.data['id'].toString();
+      }
+      return teacherId;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 
-        try {
-          var querySnapshot = await _firestore
-              .collection('teachers')
-              .where('subject', isEqualTo: subject)
-              .getDocuments();
-          final List<DocumentSnapshot> documents = querySnapshot.documents;
-
-          for (var document in documents) {
-            teacherId = document.data['id'].toString();
-          }
-        } catch (e) {
-          print(e);
-        }
-
-        print(teacherId);
-      },
-      cardChild: SubjectCard(
-        subjectName: 'Subject1',
-        teacherName: 'teacher name',
-      ),
-    ),
-    ReusableCard(
-      color: Colors.deepOrangeAccent,
-      onPress: () async {
-        subject = 'subject2';
-
-        try {
-          var querySnapshot = await _firestore
-              .collection('teachers')
-              .where('subject', isEqualTo: subject)
-              .getDocuments();
-          final List<DocumentSnapshot> documents = querySnapshot.documents;
-
-          for (var document in documents) {
-            teacherId = document.data['id'].toString();
-          }
-        } catch (e) {
-          print(e);
-        }
-
-        print(teacherId);
-      },
-      cardChild: SubjectCard(
-        subjectName: 'Subject2',
-        teacherName: 'teacher name',
-      ),
-    ),
-    ReusableCard(
-      color: Colors.cyanAccent,
-      onPress: () {
-        subject = 'subject3';
-        print(teacherId);
-      },
-      cardChild: SubjectCard(
-        subjectName: 'Subject3',
-        teacherName: 'teacher name',
-      ),
-    ),
-    ReusableCard(
-      color: Colors.amberAccent,
-      onPress: () {
-        subject = 'subject4';
-        print(teacherId);
-      },
-      cardChild: SubjectCard(
-        subjectName: 'Subject 4',
-        teacherName: 'teacher name',
-      ),
-    ),
-    ReusableCard(
-      color: Colors.deepPurpleAccent,
-      onPress: () {
-        subject = 'subject5';
-      },
-      cardChild: SubjectCard(
-        subjectName: 'Subject5',
-        teacherName: 'teacher name',
-      ),
-    ),
-    ReusableCard(
-      color: Colors.redAccent,
-      onPress: () {
-        subject = 'subject6';
-      },
-      cardChild: SubjectCard(
-        subjectName: 'Subject 6',
-        teacherName: 'teacher name',
-      ),
-    ),
-  ];
+  List<ReusableCard> _elements = [];
 
   @override
   Widget build(BuildContext context) {
+    _elements.add(
+      ReusableCard(
+        color: Colors.lightBlueAccent,
+        onPress: () async {
+          subject = 'subject1';
+          teacherId = await getTeacherId(subject);
+          print(teacherId);
+        },
+        cardChild: SubjectCard(
+          subjectName: 'Subject1',
+          teacherName: 'teacher name',
+        ),
+      ),
+    );
+    _elements.add(
+      ReusableCard(
+        color: Colors.deepOrangeAccent,
+        onPress: () async {
+          subject = 'subject2';
+          teacherId = await getTeacherId(subject);
+          print(teacherId);
+        },
+        cardChild: SubjectCard(
+          subjectName: 'Subject2',
+          teacherName: 'teacher name',
+        ),
+      ),
+    );
+    _elements.add(
+      ReusableCard(
+        color: Colors.cyanAccent,
+        onPress: () async {
+          subject = 'subject3';
+          teacherId = await getTeacherId(subject);
+          print(teacherId);
+        },
+        cardChild: SubjectCard(
+          subjectName: 'Subject3',
+          teacherName: 'teacher name',
+        ),
+      ),
+    );
+    _elements.add(
+      ReusableCard(
+        color: Colors.amberAccent,
+        onPress: () async {
+          subject = 'subject4';
+          teacherId = await getTeacherId(subject);
+          print(teacherId);
+        },
+        cardChild: SubjectCard(
+          subjectName: 'Subject 4',
+          teacherName: 'teacher name',
+        ),
+      ),
+    );
+    _elements.add(
+      ReusableCard(
+        color: Colors.deepPurpleAccent,
+        onPress: () async {
+          subject = 'subject5';
+          teacherId = await getTeacherId(subject);
+          print(teacherId);
+        },
+        cardChild: SubjectCard(
+          subjectName: 'Subject5',
+          teacherName: 'teacher name',
+        ),
+      ),
+    );
+    _elements.add(
+      ReusableCard(
+        color: Colors.deepPurpleAccent,
+        onPress: () async {
+          subject = 'subject6';
+          teacherId = await getTeacherId(subject);
+          print(teacherId);
+        },
+        cardChild: SubjectCard(
+          subjectName: 'Subject6',
+          teacherName: 'teacher name',
+        ),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(),
       backgroundColor: Colors.white,
