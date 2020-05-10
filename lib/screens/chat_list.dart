@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/reusable_card.dart';
 import 'package:flash_chat/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final _firestore = Firestore.instance;
+FirebaseUser loggedInUser;
+String teacherId;
+String subject;
 
 class ChatList extends StatefulWidget {
   static const String id = '/list';
@@ -10,34 +17,94 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
+//  Future<String> getTeacherId(String subject) async {
+//    try {
+//      var querySnapshot = await _firestore
+//          .collection('teachers')
+//          .where('subject', isEqualTo: subject)
+//          .getDocuments();
+//      final List<DocumentSnapshot> documents = querySnapshot.documents;
+//
+//      for (var document in documents) {
+//        teacherId = document.data['id'].toString();
+//      }
+//      return teacherId;
+//    } catch (e) {
+//      print(e);
+//      return e;
+//    }
+//  }
+
   List<ReusableCard> _elements = [
     ReusableCard(
       color: Colors.lightBlueAccent,
-      onPress: null,
+      onPress: () async {
+        subject = 'subject1';
+
+        try {
+          var querySnapshot = await _firestore
+              .collection('teachers')
+              .where('subject', isEqualTo: subject)
+              .getDocuments();
+          final List<DocumentSnapshot> documents = querySnapshot.documents;
+
+          for (var document in documents) {
+            teacherId = document.data['id'].toString();
+          }
+        } catch (e) {
+          print(e);
+        }
+
+        print(teacherId);
+      },
       cardChild: SubjectCard(
-        subjectName: 'Subject 1',
+        subjectName: 'Subject1',
         teacherName: 'teacher name',
       ),
     ),
     ReusableCard(
       color: Colors.deepOrangeAccent,
-      onPress: null,
+      onPress: () async {
+        subject = 'subject2';
+
+        try {
+          var querySnapshot = await _firestore
+              .collection('teachers')
+              .where('subject', isEqualTo: subject)
+              .getDocuments();
+          final List<DocumentSnapshot> documents = querySnapshot.documents;
+
+          for (var document in documents) {
+            teacherId = document.data['id'].toString();
+          }
+        } catch (e) {
+          print(e);
+        }
+
+        print(teacherId);
+      },
       cardChild: SubjectCard(
-        subjectName: 'Subject 2',
+        subjectName: 'Subject2',
         teacherName: 'teacher name',
       ),
     ),
     ReusableCard(
       color: Colors.cyanAccent,
-      onPress: null,
+      onPress: () {
+        subject = 'subject3';
+        print(teacherId);
+      },
       cardChild: SubjectCard(
-        subjectName: 'Subject 3',
+        subjectName: 'Subject3',
         teacherName: 'teacher name',
       ),
     ),
     ReusableCard(
       color: Colors.amberAccent,
-      onPress: null,
+      onPress: () {
+        subject = 'subject4';
+        print(teacherId);
+      },
       cardChild: SubjectCard(
         subjectName: 'Subject 4',
         teacherName: 'teacher name',
@@ -45,15 +112,19 @@ class _ChatListState extends State<ChatList> {
     ),
     ReusableCard(
       color: Colors.deepPurpleAccent,
-      onPress: null,
+      onPress: () {
+        subject = 'subject5';
+      },
       cardChild: SubjectCard(
-        subjectName: 'Subject 5',
+        subjectName: 'Subject5',
         teacherName: 'teacher name',
       ),
     ),
     ReusableCard(
       color: Colors.redAccent,
-      onPress: null,
+      onPress: () {
+        subject = 'subject6';
+      },
       cardChild: SubjectCard(
         subjectName: 'Subject 6',
         teacherName: 'teacher name',

@@ -142,48 +142,54 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               SizedBox(
                 height: 24.0,
               ),
-              RoundedButton(
-                color: Colors.blueAccent,
-                text: 'Register',
-                onPress: () async {
-                  setState(() {
-                    showSpinner = true;
-                  });
-                  try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
-                    _firestore.collection('students').add({
-                      'name': name,
-                      'branch': branch,
-                      'semester': semester,
-                    });
-                    if (newUser != null) {
-                      Navigator.pushNamed(context, ChatList.id);
-                    }
+              Flexible(
+                child: RoundedButton(
+                  color: Colors.blueAccent,
+                  text: 'Register',
+                  onPress: () async {
                     setState(() {
-                      showSpinner = false;
+                      showSpinner = true;
                     });
-                  } catch (e) {
-                    print(e);
-                    Alert(
-                      context: context,
-                      type: AlertType.error,
-                      title: "ALERT",
-                      desc: "unable to register student",
-                      buttons: [
-                        DialogButton(
-                          child: Text(
-                            "back",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () =>
-                              Navigator.pushNamed(context, WelcomeScreen.id),
-                          width: 120,
-                        )
-                      ],
-                    ).show();
-                  }
-                },
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+
+                      _firestore.collection('students').add({
+                        'name': name,
+                        'branch': branch,
+                        'semester': semester,
+                        'id': newUser.user.uid,
+                      });
+                      if (newUser != null) {
+                        Navigator.pushNamed(context, ChatList.id);
+                      }
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    } catch (e) {
+                      print(e);
+                      Alert(
+                        context: context,
+                        type: AlertType.error,
+                        title: "ALERT",
+                        desc: "unable to register student",
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "back",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () =>
+                                Navigator.pushNamed(context, WelcomeScreen.id),
+                            width: 120,
+                          )
+                        ],
+                      ).show();
+                    }
+                  },
+                ),
               ),
             ],
           ),

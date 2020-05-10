@@ -108,6 +108,7 @@ class _TeacherRegistrationScreenState extends State<TeacherRegistrationScreen> {
                       'name': name,
                       'subject': subject,
                       'email': email,
+                      'id': newUser.user.uid,
                     });
                     if (newUser != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
