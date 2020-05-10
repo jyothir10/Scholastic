@@ -18,6 +18,8 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
+  final _auth = FirebaseAuth.instance;
+
   Future<String> getTeacherId(String subject) async {
     try {
       var querySnapshot = await _firestore
@@ -132,7 +134,20 @@ class _ChatListState extends State<ChatList> {
     );
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: null,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              _auth.signOut();
+              Navigator.pop(context);
+            },
+          ),
+        ],
+        title: Text('Scholastic'),
+        backgroundColor: Colors.lightBlueAccent,
+      ),
       backgroundColor: Colors.white,
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
