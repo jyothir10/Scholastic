@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       if (dropdownValue == 'Student') {
                         Navigator.pushNamed(context, ChatList.id);
                       } else {
-                        Navigator.pushNamed(context, ChatScreen.id);
+                        Navigator.pushNamed(context, ChatList.id);
                       }
                     }
                     setState(() {
