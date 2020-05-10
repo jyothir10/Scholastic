@@ -27,7 +27,7 @@ class _ChatListState extends State<ChatList> {
       final List<DocumentSnapshot> documents = querySnapshot.documents;
 
       for (var document in documents) {
-        teacherId = document.data['id'].toString();
+        teacherId = document.data['id'];
       }
       return teacherId;
     } catch (e) {
@@ -47,6 +47,7 @@ class _ChatListState extends State<ChatList> {
           subject = 'subject1';
           teacherId = await getTeacherId(subject);
           print(teacherId);
+          Navigator.pushNamed(context, ChatScreen.id);
         },
         cardChild: SubjectCard(
           subjectName: 'Subject1',
@@ -61,6 +62,7 @@ class _ChatListState extends State<ChatList> {
           subject = 'subject2';
           teacherId = await getTeacherId(subject);
           print(teacherId);
+          Navigator.pushNamed(context, ChatScreen.id);
         },
         cardChild: SubjectCard(
           subjectName: 'Subject2',
@@ -75,6 +77,7 @@ class _ChatListState extends State<ChatList> {
           subject = 'subject3';
           teacherId = await getTeacherId(subject);
           print(teacherId);
+          Navigator.pushNamed(context, ChatScreen.id);
         },
         cardChild: SubjectCard(
           subjectName: 'Subject3',
@@ -89,6 +92,7 @@ class _ChatListState extends State<ChatList> {
           subject = 'subject4';
           teacherId = await getTeacherId(subject);
           print(teacherId);
+          Navigator.pushNamed(context, ChatScreen.id);
         },
         cardChild: SubjectCard(
           subjectName: 'Subject 4',
@@ -103,6 +107,7 @@ class _ChatListState extends State<ChatList> {
           subject = 'subject5';
           teacherId = await getTeacherId(subject);
           print(teacherId);
+          Navigator.pushNamed(context, ChatScreen.id);
         },
         cardChild: SubjectCard(
           subjectName: 'Subject5',
@@ -117,6 +122,7 @@ class _ChatListState extends State<ChatList> {
           subject = 'subject6';
           teacherId = await getTeacherId(subject);
           print(teacherId);
+          Navigator.pushNamed(context, ChatScreen.id);
         },
         cardChild: SubjectCard(
           subjectName: 'Subject6',

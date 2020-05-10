@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'chat_list.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -17,6 +18,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   String messageText;
+  var id;
 
   @override
   void initState() {
@@ -29,14 +31,25 @@ class _ChatScreenState extends State<ChatScreen> {
       final user = await _auth.currentUser();
       if (user != null) {
         loggedInUser = user;
+        id = loggedInUser.uid;
       }
     } catch (e) {
       print(e);
     }
   }
 
+  var groupChatId;
+
   @override
   Widget build(BuildContext context) {
+    if (id.hashCode < teacherId.hashCode) {
+      groupChatId = '$id-$teacherId';
+    } else if (teacherId.hashCode > id.hashCode) {
+      groupChatId = '$teacherId-$id';
+    } else {
+      groupChatId = '$teacherId';
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: null,
@@ -57,7 +70,9 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessagesStream(),
+            MessagesStream(
+              groupChatId: groupChatId,
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -75,11 +90,16 @@ class _ChatScreenState extends State<ChatScreen> {
                   FlatButton(
                     onPressed: () {
                       messageTextController.clear();
-                      _firestore.collection('messages').add({
+                      _firestore
+                          .collection('messages')
+                          .document(groupChatId)
+                          .collection(groupChatId)
+                          .add({
                         'text': messageText,
                         'sender': loggedInUser.email,
                         'time': DateTime.now(),
-                        'idFrom': loggedInUser.uid,
+                        'idFrom': id,
+                        'idTo': teacherId,
                       });
                     },
                     child: Text(
@@ -98,11 +118,17 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class MessagesStream extends StatelessWidget {
+  final String groupChatId;
+
+  MessagesStream({@required this.groupChatId});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
           .collection('messages')
+          .document(groupChatId)
+          .collection(groupChatId)
           .orderBy('time', descending: false)
           .snapshots(),
       builder: (context, snapshot) {
@@ -118,14 +144,17 @@ class MessagesStream extends StatelessWidget {
         for (var message in messages) {
           final messageText = message.data['text'];
           final messageSender = message.data['sender'];
+          final idFrom = message.data['idFrom'];
+          final idTo = message.data['idTo'];
 
           final currentUser = loggedInUser.email;
-          if (currentUser == messageSender) {}
 
           final messageBubble = MessageBubble(
             sender: messageSender,
             text: messageText,
             isMe: currentUser == messageSender,
+            idFrom: idFrom,
+            idTo: idTo,
           );
           messageBubbles.add(messageBubble);
         }
@@ -144,9 +173,11 @@ class MessagesStream extends StatelessWidget {
 class MessageBubble extends StatelessWidget {
   final String sender;
   final String text;
-  bool isMe;
+  final String idFrom;
+  final String idTo;
+  final bool isMe;
 
-  MessageBubble({this.sender, this.text, this.isMe});
+  MessageBubble({this.sender, this.text, this.isMe, this.idFrom, this.idTo});
   @override
   Widget build(BuildContext context) {
     return Padding(
