@@ -44,7 +44,7 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     _elements.add(
       ReusableCard(
-        color: Colors.lightBlueAccent,
+        color: Colors.greenAccent,
         onPress: () async {
           subject = 'subject1';
           teacherId = await getTeacherId(subject);
@@ -119,7 +119,7 @@ class _ChatListState extends State<ChatList> {
     );
     _elements.add(
       ReusableCard(
-        color: Colors.deepPurpleAccent,
+        color: Colors.redAccent,
         onPress: () async {
           subject = 'subject6';
           teacherId = await getTeacherId(subject);
