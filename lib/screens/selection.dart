@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/rounded_button.dart';
-import 'package:flash_chat/screens/Teacher registration screen.dart';
 import 'package:flash_chat/screens/registration_screen.dart';
+import 'package:flash_chat/screens/Teacherregistrationscreen.dart';
 
 class Selection extends StatefulWidget {
   static const String id = '/selec';
