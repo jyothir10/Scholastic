@@ -57,7 +57,6 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
-
               Navigator.pop(context);
             },
           ),
@@ -102,9 +101,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         'idTo': teacherId,
                       });
                     },
-                    child: Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
+                    child: Icon(
+                      Icons.send,
+                      color: Colors.lightBlueAccent,
                     ),
                   ),
                 ],
