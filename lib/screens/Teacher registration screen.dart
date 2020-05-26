@@ -105,9 +105,9 @@ class _TeacherRegistrationScreenState extends State<TeacherRegistrationScreen> {
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
                     _firestore.collection('teachers').add({
+                      'email': email,
                       'name': name,
                       'subject': subject,
-                      'email': email,
                       'id': newUser.user.uid,
                     });
                     if (newUser != null) {

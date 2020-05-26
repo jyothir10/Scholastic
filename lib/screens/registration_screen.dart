@@ -123,15 +123,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   value: semester,
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 28,
-                  elevation: 16,
+                  elevation: 20,
                   style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
                       semester = newValue;
                     });
                   },
-                  items: <String>['S1', 'S2', 'S3', 'S4', 'S5', 'S6']
-                      .map<DropdownMenuItem<String>>((String value) {
+                  items: <String>[
+                    'S1',
+                    'S2',
+                    'S3',
+                    'S4',
+                    'S5',
+                    'S6',
+                    'S7',
+                    'S8'
+                  ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),

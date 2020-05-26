@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   value: dropdownValue,
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 28,
-                  elevation: 16,
+                  elevation: 20,
                   style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
