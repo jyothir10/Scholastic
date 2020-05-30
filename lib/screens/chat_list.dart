@@ -10,6 +10,7 @@ final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 String teacherId;
 String subject;
+final _auth = FirebaseAuth.instance;
 
 class ChatList extends StatefulWidget {
   static const String id = '/list';
@@ -19,8 +20,6 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
-  final _auth = FirebaseAuth.instance;
-
   Future<String> getTeacherId(String subject) async {
     try {
       var querySnapshot = await _firestore
