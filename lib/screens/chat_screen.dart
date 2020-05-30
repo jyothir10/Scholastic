@@ -1,3 +1,5 @@
+//the screen for the chat,varies corresponding to the subject card selected
+
 import 'package:flash_chat/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
   }
 
-  void getCurrentUser() async {
+  void getCurrentUser() async {    //getting the user who is currently logged in in the device
     try {
       final user = await _auth.currentUser();
       if (user != null) {
@@ -44,12 +46,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (id.hashCode < teacherId.hashCode) {
+    if (id.hashCode < teacherId.hashCode) {    /*Generating a new group chat id for the particular subject
+                                               from the student and teacher id*/
+
       groupChatId = '$id-$teacherId';
     } else if (teacherId.hashCode > id.hashCode) {
       groupChatId = '$teacherId-$id';
     } else {
-      groupChatId = '$teacherId';
+      groupChatId = '$teacherId';  //This group chat id is used as the unique identifier for the particular subject
     }
 
     return Scaffold(
@@ -118,52 +122,56 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
-class MessagesStream extends StatelessWidget {
+class MessagesStream extends StatelessWidget {   /*This class deals with the
+                                              whole list of messages for the particular subject*/
   final String groupChatId;
 
   MessagesStream({@required this.groupChatId});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return StreamBuilder<QuerySnapshot>(           //Fetches the messages from cloud firestore
       stream: _firestore
           .collection('messages')
           .document(groupChatId)
           .collection(groupChatId)
-          .orderBy('time', descending: false)
+          .orderBy('time', descending: false)      //Arranges the messages according to time
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
-              child: CircularProgressIndicator(
+              child: CircularProgressIndicator(      //loading indicator
                 backgroundColor: Colors.lightBlueAccent,
               ),
             ),
           );
         }
-        final messages = snapshot.data.documents.reversed;
+        final messages = snapshot.data.documents.reversed;   /*Each message is treated as a message bubble,
+                                                       with a message text in a customised conversation box*/
         List<MessageBubble> messageBubbles = [];
-        for (var message in messages) {
-          final messageText = message.data['text'];
-          final messageSender = message.data['sender'];
-          final idFrom = message.data['idFrom'];
-          final idTo = message.data['idTo'];
+        for (var message in messages) {                     /*Each message is characterised with 4 properties*/
+          final messageText = message.data['text'];         //1.The actual message
+          final messageSender = message.data['sender'];     //2.Email address of the sender
+          final idFrom = message.data['idFrom'];            //3.id of the sender
+          final idTo = message.data['idTo'];                //4.id of the receiver
 
           final currentUser = loggedInUser.email;
 
           final messageBubble = MessageBubble(
             sender: messageSender,
             text: messageText,
-            isMe: currentUser == messageSender,
+            isMe: currentUser == messageSender,  /*IsMe is a boolean variable for understanding
+                                               whether the message is send by me or the other user
+                                                and message is arranged accordingly*/
             idFrom: idFrom,
             idTo: idTo,
           );
           messageBubbles.add(messageBubble);
         }
         return Expanded(
-          child: ListView(
+          child: ListView(          // returns the list of messages
             reverse: true,
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
             children: messageBubbles,
@@ -174,7 +182,7 @@ class MessagesStream extends StatelessWidget {
   }
 }
 
-class MessageBubble extends StatelessWidget {
+class MessageBubble extends StatelessWidget {   //Messagebubble defines how each message should look in the screen
   final String sender;
   final String text;
   final String idFrom;

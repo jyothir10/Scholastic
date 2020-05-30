@@ -1,3 +1,5 @@
+//A screen that displays the list of subjects as cards and allows the user to select the corresponding subject
+
 import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/reusable_card.dart';
@@ -99,7 +101,8 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
-  Future<String> getTeacherId(String subject) async {    //function for getting the id of the teacher who is assigned to the particular subject
+  Future<String> getTeacherId(String subject) async {
+    //function for getting the id of the teacher who is assigned to the particular subject
     try {
       var querySnapshot = await _firestore
           .collection('teachers')
@@ -108,7 +111,8 @@ class _ChatListState extends State<ChatList> {
       final List<DocumentSnapshot> documents = querySnapshot.documents;
 
       for (var document in documents) {
-        teacherId = document.data['id'];    //returns the id of the user who is the teacher of that subject
+        teacherId = document.data[
+            'id']; //returns the id of the user who is the teacher of that subject
       }
       return teacherId;
     } catch (e) {
@@ -117,11 +121,12 @@ class _ChatListState extends State<ChatList> {
     }
   }
 
-  List<ReusableCard> _elements = [];// a list of subject cards
+  List<ReusableCard> _elements = []; // a list of subject cards
 
   @override
   Widget build(BuildContext context) {
-    _elements.add(       //Setting 6 subject cards with subject name subject1,subject2 etc.
+    _elements.add(
+      //Setting 6 subject cards with subject name subject1,subject2 etc.
       ReusableCard(
         color: Colors.greenAccent,
         onPress: () async {
@@ -229,7 +234,7 @@ class _ChatListState extends State<ChatList> {
       backgroundColor: Colors.white,
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
-        children: _elements,  //Displays the list of subject cards
+        children: _elements, //Displays the list of subject cards
       ),
     );
   }
