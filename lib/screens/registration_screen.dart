@@ -1,4 +1,3 @@
-
 //This screen is meant for student registration
 
 import 'package:flash_chat/components/rounded_button.dart';
@@ -57,7 +56,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  email = value;    //getting the student email
+                  email = value; //getting the student email
                 },
                 decoration:
                     kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
@@ -69,7 +68,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   textAlign: TextAlign.center,
                   obscureText: true,
                   onChanged: (value) {
-                    password = value;   //getting the student password
+                    password = value; //getting the student password
                   },
                   decoration: kTextFieldDecoration.copyWith(
                     hintText: 'Enter your password',
@@ -80,7 +79,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               TextField(
                   textAlign: TextAlign.center,
                   onChanged: (value) {
-                    name = value;      //getting the student name
+                    name = value; //getting the student name
                   },
                   decoration: kTextFieldDecoration.copyWith(
                     hintText: 'Enter your name',
@@ -99,7 +98,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
-                      branch = newValue;       //getting the student branch
+                      branch = newValue; //getting the student branch
                     });
                   },
                   items: <String>[
@@ -130,7 +129,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
-                      semester = newValue;    //getting the semester
+                      semester = newValue; //getting the semester
                     });
                   },
                   items: <String>[
@@ -162,8 +161,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       showSpinner = true;
                     });
                     try {
-
-                     //Creating new user in firebase using the credentials provided by the student
+                      //Creating new user in firebase using the credentials provided by the student
 
                       final newUser =
                           await _auth.createUserWithEmailAndPassword(

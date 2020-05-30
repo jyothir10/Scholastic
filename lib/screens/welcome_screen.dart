@@ -1,3 +1,6 @@
+
+//welcome screen with features to login register and google sign in
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/screens/chat_list.dart';
@@ -7,13 +10,13 @@ import 'package:flash_chat/screens/selection.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_list.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 final _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 bool isGoogle = false;
 
 Future signInWithGoogle() async {
+                                          //Google sign in implementation
   try {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
@@ -34,11 +37,12 @@ Future signInWithGoogle() async {
     assert(user.uid == loggedInUser.uid);
     isGoogle = true;
   } catch (e) {
-   print(e);
+    print(e);
   }
 }
 
 void signOutGoogle() async {
+                                   //google sign out
   await googleSignIn.signOut();
 
   print("User Sign Out");
@@ -58,10 +62,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   GoogleSignInAccount _currentUser;
   String _contactText;
 
-
   @override
   void initState() {
     super.initState();
+                                        //logo animation setting
     controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 1),
@@ -85,6 +89,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     Widget _signInButton() {
+                                             //Google sign in button
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: OutlineButton(
@@ -92,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           onPressed: () async {
             var status = await signInWithGoogle();
             signInWithGoogle().whenComplete(() {
-              Navigator.pushNamed(context, ChatList.id);
+              Navigator.pushNamed(context, ChatList.id); // Successful sign in
             });
           },
           shape:
@@ -141,7 +146,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: 60.0,
                   ),
                 ),
-                TypewriterAnimatedTextKit(
+                TypewriterAnimatedTextKit(          //logo animation
                   speed: Duration(milliseconds: 500),
                   text: [' Scholastic'],
                   textStyle: TextStyle(
@@ -156,6 +161,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 RoundedButton(
+                                                     //login button
                   onPress: () {
                     Navigator.pushNamed(context, LoginScreen.id);
                   },
@@ -163,6 +169,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   text: 'Log In',
                 ),
                 RoundedButton(
+                                                     //register button
                   color: Colors.blueAccent,
                   text: 'Register',
                   onPress: () {
