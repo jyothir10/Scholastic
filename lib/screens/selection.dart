@@ -1,3 +1,5 @@
+//Select whether the user is a student or teacher for the purpose of registration
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/rounded_button.dart';
@@ -36,14 +38,16 @@ class _SelectionState extends State<Selection> {
             ),
             RoundedButton(
               color: Colors.lightBlueAccent,
-              text: 'Student',
+              text:
+                  'Student', //As the user is a student it takes to the student registration screen
               onPress: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },
             ),
             RoundedButton(
               color: Colors.blueAccent,
-              text: 'Teacher',
+              text:
+                  'Teacher', //As the user is a teacher it takes to the teacher registration screen
               onPress: () {
                 Navigator.pushNamed(context, TeacherRegistrationScreen.id);
               },

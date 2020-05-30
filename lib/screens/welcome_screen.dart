@@ -48,7 +48,7 @@ void signOutGoogle() async {
 }
 
 class WelcomeScreen extends StatefulWidget {
-  static const String id = '/';
+  static const String id = '/welcome';
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();

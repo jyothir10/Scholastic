@@ -5,12 +5,91 @@ import 'package:flash_chat/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'welcome_screen.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 String teacherId;
 String subject;
 final _auth = FirebaseAuth.instance;
+
+createDialogue(
+                                //Log out conformation
+  BuildContext context,
+) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(40),
+          ),
+          elevation: 16,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            padding: EdgeInsets.all(10.0),
+            height: 250,
+            width: 360,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Logout from scholastic ?',
+                    style: TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    FlatButton(
+                      color: Colors.blueAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "yes",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17),
+                        ),
+                      ),
+                      onPressed: () {
+                        _auth.signOut();
+                        Navigator.pushNamed(context, WelcomeScreen.id);
+                      },
+                    ),
+                    FlatButton(
+                      color: Colors.lightBlueAccent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "No",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+}
 
 class ChatList extends StatefulWidget {
   static const String id = '/list';
@@ -140,8 +219,7 @@ class _ChatListState extends State<ChatList> {
           IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
-              _auth.signOut();
-              Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+              createDialogue(context);
             },
           ),
         ],
