@@ -14,7 +14,7 @@ String subject;
 final _auth = FirebaseAuth.instance;
 
 createDialogue(
-                                //Log out conformation
+  //Log out conformation
   BuildContext context,
 ) {
   return showDialog(
@@ -99,7 +99,7 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
-  Future<String> getTeacherId(String subject) async {
+  Future<String> getTeacherId(String subject) async {    //function for getting the id of the teacher who is assigned to the particular subject
     try {
       var querySnapshot = await _firestore
           .collection('teachers')
@@ -108,7 +108,7 @@ class _ChatListState extends State<ChatList> {
       final List<DocumentSnapshot> documents = querySnapshot.documents;
 
       for (var document in documents) {
-        teacherId = document.data['id'];
+        teacherId = document.data['id'];    //returns the id of the user who is the teacher of that subject
       }
       return teacherId;
     } catch (e) {
@@ -117,11 +117,11 @@ class _ChatListState extends State<ChatList> {
     }
   }
 
-  List<ReusableCard> _elements = [];
+  List<ReusableCard> _elements = [];// a list of subject cards
 
   @override
   Widget build(BuildContext context) {
-    _elements.add(
+    _elements.add(       //Setting 6 subject cards with subject name subject1,subject2 etc.
       ReusableCard(
         color: Colors.greenAccent,
         onPress: () async {
@@ -229,7 +229,7 @@ class _ChatListState extends State<ChatList> {
       backgroundColor: Colors.white,
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
-        children: _elements,
+        children: _elements,  //Displays the list of subject cards
       ),
     );
   }
