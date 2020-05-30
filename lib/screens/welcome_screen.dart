@@ -7,6 +7,7 @@ import 'package:flash_chat/screens/selection.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_list.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -33,7 +34,7 @@ Future signInWithGoogle() async {
     assert(user.uid == loggedInUser.uid);
     isGoogle = true;
   } catch (e) {
-    print(e);
+   print(e);
   }
 }
 
@@ -56,6 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   Animation animation;
   GoogleSignInAccount _currentUser;
   String _contactText;
+
 
   @override
   void initState() {
