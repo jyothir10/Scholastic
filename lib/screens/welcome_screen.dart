@@ -116,7 +116,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   child: Text(
                     'Sign in with Google',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Colors.grey,
                     ),
                   ),

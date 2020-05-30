@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'chat_list.dart';
-import 'welcome_screen.dart';
+
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -30,7 +30,8 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
   }
 
-  void getCurrentUser() async {    //getting the user who is currently logged in in the device
+  void getCurrentUser() async {
+    //getting the user who is currently logged in in the device
     try {
       final user = await _auth.currentUser();
       if (user != null) {
@@ -46,14 +47,16 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (id.hashCode < teacherId.hashCode) {    /*Generating a new group chat id for the particular subject
+    if (id.hashCode < teacherId.hashCode) {
+      /*Generating a new group chat id for the particular subject
                                                from the student and teacher id*/
 
       groupChatId = '$id-$teacherId';
     } else if (teacherId.hashCode > id.hashCode) {
       groupChatId = '$teacherId-$id';
     } else {
-      groupChatId = '$teacherId';  //This group chat id is used as the unique identifier for the particular subject
+      groupChatId =
+          '$teacherId'; //This group chat id is used as the unique identifier for the particular subject
     }
 
     return Scaffold(
@@ -122,7 +125,8 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
-class MessagesStream extends StatelessWidget {   /*This class deals with the
+class MessagesStream extends StatelessWidget {
+  /*This class deals with the
                                               whole list of messages for the particular subject*/
   final String groupChatId;
 
@@ -130,39 +134,46 @@ class MessagesStream extends StatelessWidget {   /*This class deals with the
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(           //Fetches the messages from cloud firestore
+    return StreamBuilder<QuerySnapshot>(
+      //Fetches the messages from cloud firestore
       stream: _firestore
           .collection('messages')
           .document(groupChatId)
           .collection(groupChatId)
-          .orderBy('time', descending: false)      //Arranges the messages according to time
+          .orderBy('time',
+              descending: false) //Arranges the messages according to time
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
-              child: CircularProgressIndicator(      //loading indicator
+              child: CircularProgressIndicator(
+                //loading indicator
                 backgroundColor: Colors.lightBlueAccent,
               ),
             ),
           );
         }
-        final messages = snapshot.data.documents.reversed;   /*Each message is treated as a message bubble,
+        final messages = snapshot.data.documents.reversed;
+        /*Each message is treated as a message bubble,
                                                        with a message text in a customised conversation box*/
         List<MessageBubble> messageBubbles = [];
-        for (var message in messages) {                     /*Each message is characterised with 4 properties*/
-          final messageText = message.data['text'];         //1.The actual message
-          final messageSender = message.data['sender'];     //2.Email address of the sender
-          final idFrom = message.data['idFrom'];            //3.id of the sender
-          final idTo = message.data['idTo'];                //4.id of the receiver
+        for (var message in messages) {
+          /*Each message is characterised with 4 properties*/
+          final messageText = message.data['text']; //1.The actual message
+          final messageSender =
+              message.data['sender']; //2.Email address of the sender
+          final idFrom = message.data['idFrom']; //3.id of the sender
+          final idTo = message.data['idTo']; //4.id of the receiver
 
           final currentUser = loggedInUser.email;
 
           final messageBubble = MessageBubble(
             sender: messageSender,
             text: messageText,
-            isMe: currentUser == messageSender,  /*IsMe is a boolean variable for understanding
+            isMe: currentUser == messageSender,
+            /*IsMe is a boolean variable for understanding
                                                whether the message is send by me or the other user
                                                 and message is arranged accordingly*/
             idFrom: idFrom,
@@ -171,7 +182,8 @@ class MessagesStream extends StatelessWidget {   /*This class deals with the
           messageBubbles.add(messageBubble);
         }
         return Expanded(
-          child: ListView(          // returns the list of messages
+          child: ListView(
+            // returns the list of messages
             reverse: true,
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
             children: messageBubbles,
@@ -182,7 +194,8 @@ class MessagesStream extends StatelessWidget {   /*This class deals with the
   }
 }
 
-class MessageBubble extends StatelessWidget {   //Messagebubble defines how each message should look in the screen
+class MessageBubble extends StatelessWidget {
+  //Messagebubble defines how each message should look in the screen
   final String sender;
   final String text;
   final String idFrom;

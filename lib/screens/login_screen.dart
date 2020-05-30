@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'welcome_screen.dart';
+import 'package:flash_chat/screens/selection.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = '/login';
@@ -137,6 +138,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ).show();
                   }
                 },
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Column(
+                children: <Widget>[
+                  Text(
+                    "New to scholastic ?",
+                    style: TextStyle(color: Colors.black54, fontSize: 16),
+                  ),
+                  FlatButton(
+                    //Register button
+                    onPressed: () {
+                      Navigator.pushNamed(context, Selection.id);
+                    },
+                    color: Colors.white,
+                    child: Text(
+                      'Register',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
