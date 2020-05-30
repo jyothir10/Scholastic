@@ -1,3 +1,5 @@
+//The screen for user login
+
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/constants.dart';
 import 'chat_list.dart';
@@ -25,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ModalProgressHUD(
+      body: ModalProgressHUD(            //Loading indicator
         inAsyncCall: showSpinner,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -49,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) {
-                    email = value;
+                    email = value;          //Getting user email
                   },
                   decoration: kTextFieldDecoration.copyWith(
                       hintText: 'Enter your email')),
@@ -60,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.center,
                   obscureText: true,
                   onChanged: (value) {
-                    password = value;
+                    password = value;        //Getting user password
                   },
                   decoration: kTextFieldDecoration.copyWith(
                       hintText: 'Enter your password')),
@@ -77,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(color: Colors.black54, fontSize: 17),
                   onChanged: (String newValue) {
                     setState(() {
-                      dropdownValue = newValue;
+                      dropdownValue = newValue;    //Checking whether the user is a student or teacher
                     });
                   },
                   items: <String>['Student', 'Teacher']
@@ -94,9 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 text: 'Log In',
                 onPress: () async {
                   setState(() {
-                    showSpinner = true;
+                    showSpinner = true;       //Loading indicator
                   });
-                  try {
+                  try {         //Using firebase to authenticate the user using email and password
+
                     final newUser = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
                     if (newUser != null) {
@@ -109,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       showSpinner = false;
                     });
-                  } catch (e) {
+                  } catch (e) {        //user authentication failed
                     print(e);
                     Alert(
                       context: context,
